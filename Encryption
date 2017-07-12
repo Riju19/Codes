@@ -1,0 +1,59 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    string str;
+    cin>>str;
+    int len=str.length(),row,col;
+   
+    int r1=floor(sqrt(len));
+    int r2=ceil(sqrt(len));
+    int c1=floor(sqrt(len));
+    int c2=ceil(sqrt(len));
+    
+    if(r1*c1>=len)
+    {
+        row=r1;
+        col=c1;
+    }
+    else
+        if(r1*c2>=len)
+        {
+            row=r1;
+            col=c2;
+        }
+    else
+    {
+        row=r2;
+        col=c2;
+    }
+    char a[row][col];
+    int k=0;
+    for(int i=0;i<row;i++)
+    {
+        for(int j=0;j<col;j++)
+            {a[i][j]=str[k];
+             k++;
+            }
+        
+            
+    }
+    for(int i=0;i<col;i++)
+    {
+        for(int j=0;j<row;j++)
+        {
+            if(a[j][i]!='\0')                     //important. not using this will give you the same output but the testcases wont pass
+                cout<<a[j][i];
+        }
+       
+            cout<<" ";
+    }
+    return 0;
+}
