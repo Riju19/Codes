@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	for(int p=0;p<t;p++)
+	{
+	    int n;
+	    cin>>n;
+	    int a[n],d[n];
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>a[i];
+	    }
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>d[i];
+	    }
+	    sort(a,a+n);
+	    sort(d,d+n);
+	    
+	    int plat=1;
+	    int k=0;
+	    int l=1;
+	    int m=1;
+	    while((k<n) && (l<n))
+	    {
+	        if(d[k]>a[l])
+	        {
+	            plat++;
+	            l++;
+	            m=max(m,plat);
+	        }
+	        else
+	        {
+	            k++;
+	            plat--;
+	        }
+	    }
+	    cout<<m<<endl;
+	}
+	return 0;
+}
