@@ -1,0 +1,37 @@
+#include <iostream>
+#include <stack>
+#include <cmath>
+using namespace std;
+
+int main() {
+	//code
+	int t,n;
+	cin>>t;
+	for(int k=0;k<t;k++)
+	{
+	    cin>>n;
+	    int sum=0;
+	    int a[n],b[n];
+	    for(int j=0;j<n;j++)
+	    {
+	        cin>>a[j];
+	        b[j]=a[j];
+	        
+	    }
+	    for(int i=1;i<n;i++)
+	    {
+	        for(int j=0;j<i;j++)
+	        {
+	            if(a[j]<a[i])
+	                b[i]=max(a[i]+b[j],b[i]);
+	        }
+	    }
+	    for(int i=0;i<n;i++)
+	    {
+	        if(b[i]>sum)
+	        sum=b[i];
+	    }
+	    cout<<sum<<endl;
+	}
+	return 0;
+}
