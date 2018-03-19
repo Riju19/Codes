@@ -1,0 +1,87 @@
+TREES
+
+/// Print Binary Tree levels in sorted order
+
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <set>
+#include <vector>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n,x,now;
+	    cin>>n;
+	    int levels=floor(log(n)/log(2)) + 1;
+	    //cout<<levels;
+	    vector<vector<int>> tree(levels);
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>x;
+	        now=log(i+1)/log(2);
+	        tree[now].push_back(x);
+	        //cout<<now<<" "<<x<<endl;
+	    }
+	    for(int i=0;i<levels;i++)
+	        sort(tree[i].begin(),tree[i].end());
+	    
+	    set<int> dis;
+	    for(int i=0;i<levels;i++)
+	    {
+	        dis.clear();
+	       for(int j=0;j<tree[i].size();j++)
+	        {
+	            
+	            if(find(dis.begin(),dis.end(),tree[i][j])==dis.end())
+	                {
+	                     cout<<tree[i][j]<<" ";
+	                     dis.insert(tree[i][j]);
+	                }
+	        }    
+	           
+	       cout<<endl;     
+	    }
+	    
+	   
+	    
+	}
+	return 0;
+}
+
+/// STRINGS IN THE LIST WITH STRING X AS PREFIX
+
+
+int main() {
+	int t;
+	cin>>t;
+	
+	while(t--)
+	{
+	    int n;
+	    cin>>n;
+	    string s,sub;
+	    unordered_map<string,int> u;
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>s;
+	        for(int j=0;j<s.length();j++)
+	        {
+	            sub=s.substr(0,j+1);
+	            u[sub]++;
+	        }
+	    }
+	    int query;
+	    cin>>query;
+	    string q;
+	    while(query--)
+	    {
+	        cin>>q;
+	        cout<<u[q]<<endl;
+	    }
+	}
+	return 0;
+}

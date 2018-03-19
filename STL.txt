@@ -1,0 +1,375 @@
+/// STL
+
+// Strange Sort 
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	
+	while(t--)
+	{
+	    int n,k,temp;
+	    cin>>n>>k;
+	    int a[n];
+	    
+	    for(int i=0;i<n;i++)
+	        cin>>a[i];
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        if(i==k-1)continue;
+	        for(int j=i+1;j<n;j++)
+	        {
+	            if(j==k-1)continue;
+	            else if(a[i]>a[j])
+	            {
+	                temp=a[i];
+	                a[i]=a[j];
+	                a[j]=temp;
+	            }
+	        }
+	    }
+	    
+	    for(int i=0;i<n;i++)
+	        cout<<a[i]<<" ";
+	    
+	    cout<<endl;
+	}
+	return 0;
+}
+
+
+// ALTERNATE WORDS REVERSE
+
+#include <iostream>
+#include <bits/stdc++.h>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	string all;
+	getline(cin,all);
+	while(t--)
+	{
+	    string in,word;
+	    getline(cin,in);
+	    stringstream s(in);
+	    vector<string> v;
+	    
+	    while(s>>word)
+	    {
+	        v.push_back(word);
+	    }
+	    
+	    for(int i=0;i<v.size();i++)
+	    {
+	        if(i%2==1)
+	            reverse(v[i].begin(),v[i].end());
+	        cout<<v[i]<<" ";     
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}
+
+
+// SUBARRAY WITH 0 SUM
+
+int main() {
+	int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        int a[n];
+        int pre[n+1];
+        pre[0]=0;
+        set<int> s;
+        for(int i=0;i<n;i++)
+        {
+            cin>>a[i];
+            pre[i+1]=pre[i]+a[i];
+            s.insert(pre[i]);
+        }
+        s.insert(pre[n]);
+        if(s.size()!=n+1)
+            cout<<"Yes"<<endl;
+        else
+            cout<<"No"<<endl;
+    }
+}
+
+
+///Array Pair Sum Divisibility Problem
+
+int main() {
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,x,k,sum=0;
+        cin>>n;
+        for(int i=0;i<n;i++)
+        {
+            cin>>x;
+            sum=sum+x;
+        }
+        cin>>k;
+        
+        if(sum%k==0 && n%2==0)
+        cout<<"True"<<endl;
+        else
+        cout<<"False"<<endl;
+    }
+	return 0;
+}
+
+/// UNIQUE SUBSTRINGS
+
+int dec(string a)
+{
+    int len=a.length(),d=0,k=1;
+    for(int i=len-1;i>=0;i--)
+    {
+        if(a[i]=='1')
+            d=d+k;
+        k=k*2;
+    }
+    //cout<<d<<"  "<<a<<"   ";
+    return d;
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string str,num="";
+	    set<string> numbers;
+	    int k,l=0,d;
+	    cin>>str>>k;
+	    
+	    if(str.length()%k!=0)
+	    {
+	        cout<<"-1\n";
+	        continue;
+	    }
+	    
+	    for(int i=0;i<str.length();i++)
+	    {
+	        num=num+str[i];
+	        l++;
+	        if(l>k-1)
+	        {
+	            numbers.insert(num);
+	            //cout<<num<<" ";
+	            num="";
+	            l=0;
+	        }
+	    }
+	    int sum=0;
+	    std::set<string>::iterator it;
+	    for(it=numbers.begin();it!=numbers.end();it++)
+	    {
+	        string p=*it;
+	        d=dec(p);
+	        sum=sum+d;
+	    }
+	    cout<<sum<<endl;
+	}
+	return 0;
+}
+
+
+/// REARRANGE CHARACTERS 
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string s;
+	    cin>>s;
+	    
+	    map<char,int> c;
+	    map<char,int> ::iterator it;
+	    for(int i=0;i<s.length();i++)
+	    {
+	        if(c.find(s[i])==c.end())
+	            c.insert(make_pair(s[i],1));
+	        else
+	            {
+	                it=c.find(s[i]);
+	                it->second++;
+	            }  
+	            
+	           //it=c.find(s[i]); 
+	           //cout<<s[i]<<" "<<it->second<<endl; 
+	    }
+	    
+	    int max=0;
+	    for(it=c.begin();it!=c.end();it++)
+	    {
+	        if(it->second>max)max=it->second;
+	       // cout<<it->first<<" "<<it->second<<endl;
+	    }
+	    
+	    if(max>s.length()/2)cout<<"0\n";
+	    else cout<<"1\n";
+	}
+	return 0;
+}
+
+
+/// SORTING A STACK
+
+void SortedStack :: sort()
+{
+   //Your code here
+   stack<int> temp;
+   int top;
+   while(!s.empty())
+   {
+       top=s.top();
+       s.pop();
+       while(!temp.empty() && temp.top()<top)
+       {
+           s.push(temp.top());
+           temp.pop();
+       }
+       temp.push(top);
+       
+   }
+   
+   while(!temp.empty())
+   {
+       top=temp.top();
+       s.push(top);
+       temp.pop();
+   }
+}
+
+///SUB-ARRAYS WITH EQUAL #OCCURANCED
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n,x,y,count=0,xc,yc;
+	    cin>>n>>x>>y;
+	    
+	    int a[n];
+	    for(int i=0;i<n;i++)
+	        cin>>a[i];
+	        
+	    for(int i=0;i<n;i++)
+	    {
+	        xc=0;
+	        yc=0;
+	        for(int j=i;j<n;j++)
+	        {
+	            if(a[j]==x)xc++;
+	            if(a[j]==y)yc++;
+	            if(xc==yc)count++;
+	            //cout<<xc<<" "<<yc<<" "<<count<<endl;
+	        }
+	    }
+	    
+	    cout<<count<<endl;
+	}
+	return 0;
+}
+
+/// DISTINCT PALINDROMIC SUBSTRINGS
+
+bool pal(string w)
+{
+    int n=w.length();
+    for(int i=0;i<n/2;i++)
+    {
+        if(w[i]!=w[n-i-1])return false;
+    }
+    return true;
+}
+int main() {
+	int t;
+	cin>>t;
+	
+	while(t--)
+	{
+	    string a;
+	    cin>>a;
+	    int n=a.length();
+	    set<string> ll;
+	    for(int i=0;i<n;i++)
+	    {
+	        string w="";
+	        for(int j=i;j<n;j++)
+	        {
+	            w=w+a[j];
+	            if(pal(w))
+	                ll.insert(w);
+	                
+	            
+	        }
+	    }
+	    cout<<ll.size()<<endl;
+	}
+	return 0;
+}
+
+// CHECK MIRROR IN N-ARY TREE
+
+int mirror(vector<stack<int>> t1, vector<queue<int>> t2)
+{
+    for(int i=0;i<t1.size();i++)
+	    {
+	            stack<int>s=t1[i];
+        queue<int>q=t2[i];
+	            
+	            while(!s.empty() && !q.empty() )
+	            {
+	                if(s.top()!=q.front())return 0;
+	                s.pop();
+	                q.pop();
+	            }
+	            
+	            
+	        
+	    }
+	    return 1;
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n,e,u,v;
+	    cin>>n>>e;
+	    
+	    vector<stack<int>> t1(n+1);
+	    vector<queue<int>> t2(n+1);
+	    
+	    for(int i=0;i<e;i++)
+	    {
+	        cin>>u>>v;
+	        t1[u].push(v);
+	    }
+	    
+	    for(int i=0;i<e;i++)
+	    {
+	        cin>>u>>v;
+	        t2[u].push(v);
+	    }
+	    
+	    int a=mirror(t1,t2);
+	    cout<<a<<endl;
+	}
+	return 0;
+}
