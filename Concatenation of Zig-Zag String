@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string s;
+	    cin>>s;
+	    int k;
+	    cin>>k;
+	    
+	    if(k==1)
+	    {
+	        cout<<s<<endl;
+	        continue;
+	    }
+	        
+	    int n=s.length();
+	    vector<vector<char>> f(k);
+	    int j=0, flag=0;
+	    for(int i=0;i<n;i++)
+	    {
+	        if(flag==0)
+	        {
+	            f[j].push_back(s[i]);
+	            j++;
+	        }
+	        else if(flag==1)
+	        {
+	            f[j].push_back(s[i]);
+	            j--;
+	        }
+	        if(j==k)
+	        {
+	            flag=1;
+	            j=j-2;
+	        }
+	        if(j==-1)
+	        {
+	            flag=0;
+	            j=j+2;
+	        }
+	        
+	    }
+	    
+	    for(int i=0;i<k;i++)
+	    {
+	        for(int j=0;j<f[i].size();j++)
+	            cout<<f[i][j];
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}
