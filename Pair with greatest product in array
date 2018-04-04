@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n,x,prod,flag=0;
+	    cin>>n;
+	    vector<int> a;
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>x;
+	        a.push_back(x);
+	    }
+	    
+	    set<int> p;
+	    for(int i=0;i<n-1;i++)
+	    {
+	        //cout<<a[i];
+	        for(int j=i+1;j<n;j++)
+	        {
+	            prod=a[i]*a[j];
+	            //cout<<prod<<" ";
+	            if(find(a.begin(),a.end(),prod)!=a.end())
+	            {
+	                p.insert(prod);
+	            }
+	        }
+	        
+	    }
+	    if(p.size()==0)
+	        cout<<"-1\n";
+	    else
+	        cout<<*p.rbegin()<<endl;
+	}
+	return 0;
+}
