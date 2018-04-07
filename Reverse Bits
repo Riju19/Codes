@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+
+vector<int> convert_to_bin(int n)
+{
+    vector<int> a;
+    while(n>0)
+    {
+        a.push_back(n%2);
+        n=n/2;
+        
+    }
+    return a;
+}
+
+long long dec(vector<int> a)
+{
+    reverse(a.begin(),a.end());
+    long long num=0;
+    int k=0;
+    for(int i=0;i<32;i++)
+    {
+        num=num+(a[i]*pow(2,k));
+        k++;
+    }
+    
+    return num;
+}
+
+int main() {
+	int t ;
+	cin>>t;
+	while(t--)
+	{
+	    long long n;
+	    cin>>n;
+	    
+	    vector<int> a=convert_to_bin(n);
+	   
+	    while(a.size()!=32)
+	    {
+	        a.push_back(0);
+	       
+	    }
+	    long long b=dec(a);
+	    cout<<b<<endl;
+	}
+	return 0;
+}
