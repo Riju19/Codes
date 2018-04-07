@@ -1,0 +1,118 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+long long getdec(vector<int> a)
+{
+    int k=0;
+    long long dec=0;
+    for(int i=0;i<a.size();i++)
+    {
+        dec=dec+(a[i]*pow(2,k));
+        k++;
+    }
+    return dec;
+}
+long long longest_sub(vector<int> a, vector<int> b, int lena, int lenb )
+{
+    int mat[lena+1][lenb+1];
+    for(int i=0;i<=lena;i++)
+    {
+        mat[i][0]=0;
+    }
+    //cout<<endl;
+    for(int i=0;i<=lenb;i++)
+    {
+        mat[0][i]=0;
+    }
+    
+    int len=0, row, col;
+    for(int i=1;i<=lena;i++)
+    {
+        for(int j=1;j<=lenb;j++)
+        {
+            if(a[i-1]==b[j-1])
+            {
+                mat[i][j]=mat[i-1][j-1]+1;
+                if(len<mat[i][j])
+                {
+                    len=mat[i][j];
+                    row=i;
+                    col=j;
+                }
+            }
+            else
+                mat[i][j]=0;
+                
+            //cout<<mat[i][j]<<" ";    
+        }
+        //cout<<endl;
+        
+    }
+    
+    vector<long long> ans;
+    for(int i=0;i<=lena;i++)
+    {
+        for(int j=0;j<=lenb;j++)
+        {
+            if(mat[i][j]==len)
+            {
+                vector<int> str;
+                row=i;
+                col=j;
+                while(mat[row][col]>0)
+                {
+                    str.push_back(a[row-1]);
+                    row--;
+                    col--;
+                    
+                }
+                ans.push_back(getdec(str));
+            }
+        }
+    }
+    int max=0;
+    for(int i=0;i<ans.size();i++)
+        if(max<ans[i])
+            max=ans[i];
+            
+    return max;        
+}
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    long long n,m,temp;
+	    cin>>n>>m;
+	    
+	    vector<int> n1;
+	    vector<int> m1;
+	    
+	    while(n>0)
+	    {
+	        temp=n%2;
+	        n1.push_back(temp);
+	        n=n/2;
+	    }
+	    
+	    while(m>0)
+	    {
+	        temp=m%2;
+	        m1.push_back(temp);
+	        m=m/2;
+	    }
+	    
+	    reverse(n1.begin(),n1.end());
+	    reverse(m1.begin(),m1.end());
+	    
+	    int lm=m1.size();
+	    int ln=n1.size();
+	    
+	    cout<<longest_sub(n1,m1,ln,lm)<<endl;
+	        
+	}
+	return 0;
+}
