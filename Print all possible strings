@@ -1,0 +1,15 @@
+void ps(string str, int i){
+    if(str.size() == i){
+        cout<<str<<"$";
+        return;
+    }
+    ps(str, i+1);
+    ps(str.substr(0, i) + " " + str.substr(i), i+2);
+    
+    
+}
+void  printSpace(char str[])
+{
+    
+    ps(str, 1);
+}
