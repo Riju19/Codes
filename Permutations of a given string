@@ -1,0 +1,38 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+string result = "";
+void printPermutation(string str,int l,int h)
+{
+    if(l>h)
+        return;
+    if(l==h)
+    {
+        cout<<result<<" ";
+        return;
+    }
+    for(int i=l;i<h;i++)
+    {
+        swap(str[l],str[i]);
+        result = result + str[l];
+        printPermutation(str,l+1,h);
+        result.pop_back();
+    }
+    
+    
+}
+int main()
+ {
+	int t;
+    cin>>t;
+    while(t--)
+    {
+        string str;
+        cin>>str;
+        result = "";
+        sort(str.begin(),str.end());
+        printPermutation(str,0,str.length());
+        cout<<endl;
+    }
+	return 0;
+}
